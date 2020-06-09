@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context=".EventViewActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#29418F"
+        android:theme="@style/AppTheme.NoActionBar"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginRight="70dp"
+            app:srcCompat="@drawable/logo4" />
+
+    </androidx.appcompat.widget.Toolbar>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="추천 사이트"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        android:gravity="center_horizontal"
+        android:layout_marginVertical="10dp"
+        android:text="노트북 전문 사이트"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/imageBtn1"
+                android:layout_width="70dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="7dp"
+                android:background="@drawable/compuzone"></ImageButton>
+
+            <ImageButton
+                android:id="@+id/imageBtn2"
+                android:layout_width="70dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/comsclub"></ImageButton>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="7dp"
+                android:text="컴퓨존"
+                android:textAlignment="center"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:layout_height="20dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="15dp"
+                android:text="컴스클럽"
+                android:textAlignment="center"
+                android:textStyle="bold"></TextView>
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="7dp"
+                android:textAlignment="center"
+                android:text="전자제품 전문 사이트"></TextView>
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="15dp"
+                android:textAlignment="center"
+                android:text="게임용, 오버클러킹, PC부품"></TextView>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/imageBtn3"
+                android:layout_width="70dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="7dp"
+                android:background="@drawable/dicle"></ImageButton>
+
+            <ImageButton
+                android:id="@+id/imageBtn4"
+                android:layout_width="70dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/dtek"></ImageButton>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_height="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="7dp"
+                android:text="디클"
+                android:textAlignment="center"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:layout_height="20dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="15dp"
+                android:text="디테크"
+                android:textAlignment="center"
+                android:textStyle="bold"></TextView>
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="7dp"
+                android:textAlignment="center"
+                android:text="뛰어난 가성비, 다양한 컬러"></TextView>
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="15dp"
+                android:textAlignment="center"
+                android:text="리퍼비시 판매 전문"></TextView>
+        </TableRow>
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        android:gravity="center_horizontal"
+        android:text="통합 쇼핑몰"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:layout_marginVertical="10dp"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/imageBtn5"
+                android:layout_width="70dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="7dp"
+                android:background="@drawable/auction"></ImageButton>
+
+            <ImageButton
+                android:id="@+id/imageBtn6"
+                android:layout_width="70dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/gmarket"></ImageButton>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_height="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="7dp"
+                android:text="옥션 노트북 바로가기"
+                android:textAlignment="center"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:layout_height="20dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="15dp"
+                android:text="지마켓 노트북 바로가기"
+                android:textAlignment="center"
+                android:textStyle="bold"></TextView>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/imageBtn7"
+                android:layout_width="70dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="7dp"
+                android:background="@drawable/interpark"></ImageButton>
+
+            <ImageButton
+                android:id="@+id/imageBtn8"
+                android:layout_width="70dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/g9"></ImageButton>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_height="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="7dp"
+                android:text="인터파크 노트북 바로가기"
+                android:textAlignment="center"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:layout_height="20dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="15dp"
+                android:text="G9 노트북 바로가기"
+                android:textAlignment="center"
+                android:textStyle="bold"></TextView>
+        </TableRow>
+    </TableLayout>
+</LinearLayout>
+</ScrollView>

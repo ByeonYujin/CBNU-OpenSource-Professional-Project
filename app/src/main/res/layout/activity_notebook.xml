@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/background_light">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:background="#29418F"
+        android:theme="@style/AppTheme.NoActionBar"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginRight="70dp"
+            app:srcCompat="@drawable/logo4" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageButton
+        android:id="@+id/recommendBtn"
+        android:layout_width="320dp"
+        android:layout_height="160dp"
+        android:background="@drawable/nb_rc"
+        android:layout_marginTop="130dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <ImageButton
+        android:id="@+id/buyBtn"
+        android:layout_width="320dp"
+        android:layout_height="160dp"
+        android:background="@drawable/nb_buy"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal" />
+
+
+</LinearLayout>

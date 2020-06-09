@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="300dp"
+    android:layout_height="wrap_content">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="#e5e5e5"
+        android:stretchColumns="0">
+        <TableRow>
+            <ImageView
+                android:id="@+id/notebookImage"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="40dp"
+                android:src="@mipmap/ic_launcher" />
+            <ImageButton
+                android:src="@drawable/ic_close"
+                android:layout_width="50dp"
+                android:background="#e5e5e5"
+                android:layout_height="50dp"
+                android:onClick="mOnClose"/>
+        </TableRow>
+    </TableLayout>
+    <!-- //end 타이틀바 -->
+
+    <!-- Notice -->
+    <TableLayout
+        android:padding="24dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+        <TableRow
+            android:layout_marginBottom="10dp">
+            <TextView
+                android:textSize="13sp"
+                android:textColor="#29418F"
+                android:alpha="0.87"
+                android:gravity="center"
+                android:layout_marginBottom="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/model"
+                />
+            <TextView
+                android:id="@+id/model"
+                android:textSize="13sp"
+                android:textColor="#000"
+                android:alpha="0.87"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="100"
+                android:layout_weight="1"
+                android:ellipsize="none"
+                android:scrollHorizontally="false"
+                android:singleLine="false" />
+        </TableRow>
+        <TableRow
+            android:layout_marginBottom="10dp">
+            <TextView
+                android:textSize="13sp"
+                android:textColor="#29418F"
+                android:alpha="0.87"
+                android:gravity="center"
+                android:layout_marginBottom="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/price"/>
+            <TextView
+                android:id="@+id/price"
+                android:layout_marginLeft="20dp"
+                android:textSize="13sp"
+                android:textColor="#000"
+                android:alpha="0.87"
+                android:layout_marginBottom="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:textSize="13sp"
+                android:textColor="#29418F"
+                android:alpha="0.87"
+                android:gravity="center"
+                android:layout_marginBottom="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/spec" />
+            <TextView
+                android:id="@+id/spec"
+                android:textSize="13sp"
+                android:layout_marginLeft="20dp"
+                android:textColor="#000"
+                android:alpha="0.87"
+                android:layout_marginBottom="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="100"
+                android:layout_weight="1"
+                android:ellipsize="none"
+                android:scrollHorizontally="false"
+                android:singleLine="false"/>
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+        <ImageButton
+            android:src="@drawable/ic_share"
+            android:id="@+id/shareBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#ffffff" />
+        <ImageButton
+            android:src="@drawable/ic_textcopy"
+            android:id="@+id/copyBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#ffffff" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -12,7 +12,7 @@ public class RefriselectionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);//히히 찬우 주석이에요
         setContentView(R.layout.activity_refriselection);
 
         Toolbar toolbar = findViewById(R.id.toolbar);

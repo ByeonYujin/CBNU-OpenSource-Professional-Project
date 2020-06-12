@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_login">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="120dp"
+                android:background="@drawable/logo5"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="160dp" />
+
+
+            <EditText
+                android:id="@+id/emailEditText"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:ems="10"
+                android:layout_marginTop="19dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="15dp"
+                android:hint="이메일"
+                android:textColorHint="#ffffff"
+                android:backgroundTint="#ffffff"
+                android:textColor="#ffffff"
+                android:inputType="textEmailAddress"
+                android:textSize="17dp"
+                android:background="@android:color/transparent"/>
+
+            <EditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="39dp"
+                android:ems="10"
+                android:hint="비밀번호"
+                android:layout_marginLeft="15dp"
+                android:textColor="#ffffff"
+                android:layout_gravity="center_horizontal"
+                android:textColorHint="#ffffff"
+                android:textSize="17dp"
+                android:backgroundTint="#ffffff"
+                android:background="@android:color/transparent"
+                android:inputType="textPassword" />
+
+            <Button
+                android:id="@+id/loginButton"
+                android:layout_marginTop="30dp"
+                android:layout_width="360dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/loginbutton"
+                android:text="로그인"
+                android:textSize="18dp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="아직 회원이 아니신가요?"
+                    android:textColor="#ffffff"
+                    android:layout_marginRight="5dp"></TextView>
+
+                <TextView
+                    android:id="@+id/signUpTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/signup"
+                    android:layout_gravity="center_horizontal"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

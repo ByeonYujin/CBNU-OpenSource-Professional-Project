@@ -28,15 +28,15 @@ public class TvselectionActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:{
-                GoElecselectionActivity();
+                GoMainActivity();
                 break;
             }
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void GoElecselectionActivity(){
-        Intent intent = new Intent(this, ElecselectionActivity.class);
+    private void GoMainActivity(){
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }

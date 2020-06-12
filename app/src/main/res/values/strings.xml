@@ -94,4 +94,5 @@
     <string name="model"> <u>모델명</u></string>
     <string name="price"><u>가격</u></string>
     <string name="spec"><u>스펙</u></string>
+    <string name="signup"><u>회원가입</u></string>
 </resources>

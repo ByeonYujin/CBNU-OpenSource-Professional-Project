@@ -26,6 +26,7 @@ public class ResultActivity extends AppCompatActivity {
     private ListView list;
     private NoteBookService noteBookService;
     private Integer count;
+    private int k;
 
     List<String> listName = new ArrayList<>();
     List<String> listPrice = new ArrayList<>();
@@ -36,45 +37,6 @@ public class ResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycler_view);
-        TextView manufactureOption = (TextView) findViewById(R.id.manufactureTv);
-        TextView purposeOption = (TextView) findViewById(R.id.purposeTv);
-        TextView sizeOption = (TextView) findViewById(R.id.sizeTv);
-        TextView resultCount = (TextView)findViewById(R.id.countTv);
-
-        //인텐트로 스피너받아오기
-        Intent intent= getIntent();
-        String manufacture = intent.getStringExtra("manufacture");
-        String purpose = intent.getStringExtra("purpose");
-        String size = intent.getStringExtra("size");
-
-
-        noteBookService = new NoteBookService(getApplicationContext());
-        List<NoteBook> noteBooks = noteBookService.getNoteBookList(manufacture, purpose, size);
-        listName = noteBookService.getSubList(manufacture, purpose, size, 0);
-        listPrice = noteBookService.getSubList(manufacture, purpose, size, 2);
-        listSpec = noteBookService.getSubList(manufacture, purpose, size, 6);
-
-
-        //list=(ListView)findViewById(R.id.list);
-
-        /*List<String> data = new ArrayList<>();  // 리스트뷰에 넣을 data
-        ArrayAdapter<String>adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,data);
-        list.setAdapter(adapter);
-//                리스트뷰 연습
-//
-        data.add(manufacture);
-        data.add(purpose);
-        data.add(size);*/
-
-/*        for (NoteBook book : noteBooks) {
-//            Log.d("NOTEBOOK INFO : ", book.asString());
-//        }
-
-        //db전체 데이터 집어넣기
-//        for(NoteBook book : noteBooks) {
-//            data.add(book.asString());
-//        } */
-
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         ActionBar actionBar;
@@ -84,19 +46,69 @@ public class ResultActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        TextView firstOption = (TextView) findViewById(R.id.option1Tv);
+        TextView secondOption = (TextView) findViewById(R.id.option2Tv);
+        TextView thirdOption = (TextView) findViewById(R.id.option3Tv);
+        TextView resultCount = (TextView)findViewById(R.id.countTv);
+
+        //인텐트로 스피너받아오기
+        Intent intent= getIntent();
+        String obj = intent.getStringExtra("obj");
+        String option1="", option2="", option3="";
+
+        switch(obj) {
+            case "notebook":
+                option1 = intent.getStringExtra("manufacture");
+                option2 = intent.getStringExtra("purpose");
+                option3 = intent.getStringExtra("size");
+                //상단 Spiner값(선택 옵션) 출력
+                firstOption.setText(option1);
+                secondOption.setText(option2);
+                thirdOption.setText(option3);
+                k=1;
+                break;
+            case "washer":
+                /*option1 = intent.getStringExtra("form");
+                option2 = intent.getStringExtra("manufacture");
+                option3 = intent.getStringExtra("capacity");*/
+                //상단 Spiner값(선택 옵션) 출력
+                firstOption.setText(option1);
+                secondOption.setText(option2);
+                thirdOption.setText(option3);
+                break;
+            case "tv":
+                /*option1 = intent.getStringExtra("form");
+                option2 = intent.getStringExtra("manufacture");*/
+                firstOption.setText(option1);
+                secondOption.setText(option2);
+                break;
+            case "refrigerator":
+                /*option1 = intent.getStringExtra("form");
+                option2 = intent.getStringExtra("manufacture");
+                option3 = intent.getStringExtra("capacity");*/
+                //상단 Spiner값(선택 옵션) 출력
+                firstOption.setText(option1);
+                secondOption.setText(option2);
+                thirdOption.setText(option3);
+                break;
+        }
+
         //커스텀뷰 세팅
         ViewSet();
 
-        //상단 Spiner값(선택 옵션) 출력
-        manufactureOption.setText(manufacture);
-        purposeOption.setText(purpose);
-        sizeOption.setText(size);
+        if (k==1) {
+            noteBookService = new NoteBookService(getApplicationContext());
+            List<NoteBook> noteBooks = noteBookService.getNoteBookList(option1, option2, option3);
+            listName = noteBookService.getSubList(option1, option2, option3, 0);
+            listPrice = noteBookService.getSubList(option1, option2, option3, 2);
+            listSpec = noteBookService.getSubList(option1, option2, option3, 6);
 
-        //리스트 항목 추가
-        count = getData();
+            //리스트 항목 추가
+            count = getData();
 
-        //검색된 항목 수 표시
-        resultCount.setText("검색 결과 : 총 "+count.toString()+"개");
+            //검색된 항목 수 표시
+            resultCount.setText("검색 결과 : 총 " + count.toString() + "개");
+        }
     }
 
     @Override
@@ -145,14 +157,16 @@ public class ResultActivity extends AppCompatActivity {
 
     //팝업창
     public void mOnPopupClick(View v){
-        //데이터 담아서 팝업(액티비티) 호출
-        recyclerView = findViewById(R.id.recyclerView);
-        Integer position = recyclerView.getChildLayoutPosition(v);
-        Intent intent = new Intent(this, PopupActivity.class);
-        intent.putExtra("model", listName.get(position));
-        intent.putExtra("price", listPrice.get(position));
-        intent.putExtra("spec", listSpec.get(position));
-        startActivityForResult(intent, 1);
+        if(k==1) {
+            //데이터 담아서 팝업(액티비티) 호출
+            recyclerView = findViewById(R.id.recyclerView);
+            Integer position = recyclerView.getChildLayoutPosition(v);
+            Intent intent = new Intent(this, PopupActivity.class);
+            intent.putExtra("model", listName.get(position));
+            intent.putExtra("price", listPrice.get(position));
+            intent.putExtra("spec", listSpec.get(position));
+            startActivityForResult(intent, 1);
+        }
     }
 }
 

@@ -19,13 +19,11 @@ public class SelectOptionActivity extends AppCompatActivity {
 
     private String manufacture,purpose, size;
     private Spinner spinner2,spinner4,spinner5;
-
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_option);
-
 
         spinner2 = (Spinner)findViewById(R.id.spinner2);
         spinner4 = (Spinner)findViewById(R.id.spinner4);
@@ -132,6 +130,7 @@ public class SelectOptionActivity extends AppCompatActivity {
         intent.putExtra("manufacture",manufacture);
         intent.putExtra("purpose",purpose);
         intent.putExtra("size",size);
+        intent.putExtra("obj", "notebook");
         startActivity(intent);
     }
 

@@ -31,32 +31,32 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/manufactureTv"
+                android:id="@+id/option1Tv"
                 android:layout_marginVertical="15dp"
                 android:layout_marginHorizontal="30dp"
                 android:textAlignment="center"
                 android:textStyle="bold"
-                android:text="제조사"></TextView>
+                android:text=""></TextView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/purposeTv"
+                android:id="@+id/option2Tv"
                 android:layout_marginVertical="15dp"
                 android:layout_marginRight="30dp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:text="사용 용도"></TextView>
+                android:text=""></TextView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/sizeTv"
+                android:id="@+id/option3Tv"
                 android:layout_marginVertical="15dp"
                 android:layout_marginRight="30dp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:text="화면 크기"></TextView>
+                android:text=""></TextView>
         </TableRow>
     </TableLayout>
 

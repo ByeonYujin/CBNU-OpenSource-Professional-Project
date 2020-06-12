@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
@@ -27,6 +28,7 @@ public class ResultActivity extends AppCompatActivity {
     private NoteBookService noteBookService;
     private Integer count;
     private int k;
+    private Class back;
 
     List<String> listName = new ArrayList<>();
     List<String> listPrice = new ArrayList<>();
@@ -65,6 +67,7 @@ public class ResultActivity extends AppCompatActivity {
                 firstOption.setText(option1);
                 secondOption.setText(option2);
                 thirdOption.setText(option3);
+                back = SelectOptionActivity.class;
                 k=1;
                 break;
             case "washer":
@@ -75,12 +78,14 @@ public class ResultActivity extends AppCompatActivity {
                 firstOption.setText(option1);
                 secondOption.setText(option2);
                 thirdOption.setText(option3);
+                back = WasherselectionActivity.class;
                 break;
             case "tv":
                 /*option1 = intent.getStringExtra("form");
                 option2 = intent.getStringExtra("manufacture");*/
                 firstOption.setText(option1);
                 secondOption.setText(option2);
+                back = TvselectionActivity.class;
                 break;
             case "refrigerator":
                 /*option1 = intent.getStringExtra("form");
@@ -90,6 +95,7 @@ public class ResultActivity extends AppCompatActivity {
                 firstOption.setText(option1);
                 secondOption.setText(option2);
                 thirdOption.setText(option3);
+                back = RefriselectionActivity.class;
                 break;
         }
 
@@ -115,17 +121,12 @@ public class ResultActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home: {
-                GoMainActivity();
+                Intent intent = new Intent(this, back);
+                startActivity(intent);
                 break;
             }
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    //SelectOptionActivity로 이동
-    private void GoMainActivity() {
-        Intent intent = new Intent(this, SelectOptionActivity.class);
-        startActivity(intent);
     }
 
     private void ViewSet() {

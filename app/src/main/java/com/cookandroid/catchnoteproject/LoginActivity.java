@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
 
         findViewById(R.id.loginButton).setOnClickListener(onClickListener);
         findViewById(R.id.signUpTv).setOnClickListener(onClickListener);
+        findViewById(R.id.pass).setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -38,6 +39,9 @@ public class LoginActivity extends AppCompatActivity {
                     break;
                 case R.id.signUpTv:
                     myStartActivity(SignUpActivity.class);
+                    break;
+                case R.id.pass:
+                    GoMainActivity();
                     break;
             }
         }
@@ -84,5 +88,10 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, c);
         startActivity(intent);
         //overridePendingTransition(R.anim.right_in,R.anim.not_move);
+    }
+
+    private void GoMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

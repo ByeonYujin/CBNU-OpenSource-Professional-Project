@@ -28,9 +28,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+        /*if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             startLoginActivity();
-        }
+        }*/
 
         helper = new DataBaseHelper(getApplicationContext());
         try {

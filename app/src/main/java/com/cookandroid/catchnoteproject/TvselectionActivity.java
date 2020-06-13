@@ -100,10 +100,8 @@ public class TvselectionActivity extends AppCompatActivity {
 
     //ResultActivity로 이동
     private void GoResultActivity(){
-        Intent intent = new Intent(this, ResultActivity.class);
-        intent.putExtra("manufacture", manufacture);
-        intent.putExtra("size",size);
-        intent.putExtra("obj", "tv");
+        Intent intent = new Intent(this, TvResult.class);
+
         startActivity(intent);
     }
 

@@ -117,7 +117,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".WashingResult" />
-
+        <activity android:name=".TvResult"/>
 
     </application>
 

@@ -29,14 +29,12 @@
     <string-array name="세탁기제조사">
         <item>삼성</item>
         <item>엘지</item>
-        <item>위니아대우</item>
-        <item>위니아딤채</item>
     </string-array>
 
     <string-array name="세탁용량">
-        <item>~9kg</item>
-        <item>10~20kg</item>
-        <item>21kg~</item>
+        <item>14kg</item>
+        <item>16kg</item>
+        <item>20kg</item>
     </string-array>
     
     <string-array name="티브이제조사">
@@ -65,7 +63,7 @@
     
     <string-array name="에너지효율">
         <item>1등급</item>
-        <item>2등금</item>
+        <item>2등급</item>
         <item>3등급</item>
     </string-array>
 

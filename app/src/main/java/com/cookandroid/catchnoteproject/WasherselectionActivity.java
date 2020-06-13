@@ -8,14 +8,29 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class WasherselectionActivity extends AppCompatActivity {
+
+    //이승우가 하는부분
+
+
+
 
     private String form,manufacture, capacity;
     private Spinner option1,option2, option3;
@@ -24,6 +39,10 @@ public class WasherselectionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_washerselection);
+
+
+
+
 
         option1 = (Spinner)findViewById(R.id.spinner4);
         option2 = (Spinner)findViewById(R.id.spinner2);
@@ -112,11 +131,7 @@ public class WasherselectionActivity extends AppCompatActivity {
 
     //ResultActivity로 이동
     private void GoResultActivity(){
-        Intent intent = new Intent(this, ResultActivity.class);
-        intent.putExtra("form",form);
-        intent.putExtra("manufacture",manufacture);
-        intent.putExtra("capacity",capacity);
-        intent.putExtra("obj", "washer");
+        Intent intent = new Intent(this, WashingResult.class);
         startActivity(intent);
     }
 
@@ -141,4 +156,6 @@ public class WasherselectionActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+
 }

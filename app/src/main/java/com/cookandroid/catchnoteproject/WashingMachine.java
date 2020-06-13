@@ -6,7 +6,7 @@ public class WashingMachine {
     private String id;
     private int money;
     private String spec;
-
+    //중요하
     public WashingMachine(){}
 
     public String getProfile() {

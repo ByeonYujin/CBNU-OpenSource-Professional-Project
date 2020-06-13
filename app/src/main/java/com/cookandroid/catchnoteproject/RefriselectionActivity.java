@@ -32,8 +32,8 @@ public class RefriselectionActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        option1 = (Spinner)findViewById(R.id.spinner2);
-        option2 = (Spinner)findViewById(R.id.spinner4);
+        option1 = (Spinner)findViewById(R.id.spinner4);
+        option2 = (Spinner)findViewById(R.id.spinner2);
         option3 = (Spinner)findViewById(R.id.spinner5);
 
         option1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -111,6 +111,14 @@ public class RefriselectionActivity extends AppCompatActivity {
     //ResultActivity로 이동
     private void GoResultActivity(){
         Intent intent = new Intent(this, RefrigeratorResult.class);
+        String sp1 = option1.getSelectedItem().toString();
+        String sp2 = option2.getSelectedItem().toString();
+        String sp3 = option3.getSelectedItem().toString();
+
+        intent.putExtra("in3",sp1);
+        intent.putExtra("in4",sp2);
+        intent.putExtra("in5",sp3);
+
         startActivity(intent);
 
     }

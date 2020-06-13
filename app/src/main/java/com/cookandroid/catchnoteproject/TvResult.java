@@ -1,5 +1,6 @@
 package com.cookandroid.catchnoteproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -30,8 +31,16 @@ public class TvResult extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycler_view);
 
+        Intent intent =new Intent(getIntent());
+
+        final String m= intent.getStringExtra("in1");
+        final String size = intent.getStringExtra("in2");
+
+
+
+
         recyclerView = findViewById(R.id.recyclerView);
-        // recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         arrayList=new ArrayList<Tv>(); // User 객체를 담을 어레이 리스트 (어댑터 쪽으로)
@@ -46,8 +55,9 @@ public class TvResult extends AppCompatActivity {
                 arrayList.clear(); // 기존 배열리스트가 존재하지않게 초기화
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {   //반복문으로 데이터 list추출
                     Tv tv = snapshot.getValue(Tv.class); // 만들어뒀던 티비 객체에 데이터 담음
-                    arrayList.add(tv); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보내준비
-
+                    if(m.equals(tv.getManufacturer())&&size.equals(tv.getType())) {
+                        arrayList.add(tv); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보내준비
+                    }
                 }
                 adapter.notifyDataSetChanged();
 

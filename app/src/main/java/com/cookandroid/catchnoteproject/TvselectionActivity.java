@@ -25,6 +25,7 @@ public class TvselectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tvselection);
 
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         ActionBar actionBar;
         setSupportActionBar(toolbar);
@@ -101,8 +102,20 @@ public class TvselectionActivity extends AppCompatActivity {
     //ResultActivity로 이동
     private void GoResultActivity(){
         Intent intent = new Intent(this, TvResult.class);
+        //인텐트로 스피너보내기
+        String sp1 = option1.getSelectedItem().toString();
+        String sp2 = option2.getSelectedItem().toString();
+
+
+
+        intent.putExtra("in1",sp1);
+        intent.putExtra("in2",sp2);
 
         startActivity(intent);
+
+
+
+
     }
 
     @Override
@@ -119,5 +132,7 @@ public class TvselectionActivity extends AppCompatActivity {
     private void GoMainActivity(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+
+
     }
 }

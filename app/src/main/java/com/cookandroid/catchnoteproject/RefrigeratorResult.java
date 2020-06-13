@@ -1,5 +1,6 @@
 package com.cookandroid.catchnoteproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -30,8 +31,17 @@ public class RefrigeratorResult extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycler_view);
 
+
+        Intent intent2 =new Intent(getIntent());
+
+        final String t= intent2.getStringExtra("in3");
+        final String m = intent2.getStringExtra("in4");
+        final String e = intent2.getStringExtra("in5");
+
+
+
         recyclerView = findViewById(R.id.recyclerView);
-        // recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         arrayList= new ArrayList<Refrigerator>(); // User 객체를 담을 어레이 리스트 (어댑터 쪽으로)
@@ -46,7 +56,17 @@ public class RefrigeratorResult extends AppCompatActivity {
                 arrayList.clear(); // 기존 배열리스트가 존재하지않게 초기화
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {   //반복문으로 데이터 list추출
                     Refrigerator refrigerator = snapshot.getValue(Refrigerator.class); // 만들어뒀던 티비 객체에 데이터 담음
-                    arrayList.add(refrigerator); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보내준비
+
+                    String test = refrigerator.getType();
+
+                    String test2 = refrigerator.getManufacturer();
+                    String test3 = refrigerator.getGrade();
+
+
+                    if((t.equals(test))&&(m.equals(test2))&&(e.equals(test3))) {
+                       Log.d(test,test);
+                        arrayList.add(refrigerator); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보내준비
+                    }
 
                 }
                 adapter.notifyDataSetChanged();

@@ -46,9 +46,9 @@
 
     <string-array name="티브이화면크기">
         <item>32인치</item>
-        <item>55인치</item>
-        <item>65인치</item>
-        <item>75인치</item>
+        <item>40인치</item>
+        <item>46인치</item>
+        <item>49인치</item>
     </string-array>
     
     <string-array name="냉장고제조사">

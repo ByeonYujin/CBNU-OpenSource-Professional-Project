@@ -110,12 +110,9 @@ public class RefriselectionActivity extends AppCompatActivity {
 
     //ResultActivity로 이동
     private void GoResultActivity(){
-        Intent intent = new Intent(this, ResultActivity.class);
-        intent.putExtra("form",form);
-        intent.putExtra("manufacture",manufacture);
-        intent.putExtra("grade",grade);
-        intent.putExtra("obj", "refrigerator");
+        Intent intent = new Intent(this, RefrigeratorResult.class);
         startActivity(intent);
+
     }
 
     @Override

@@ -118,6 +118,7 @@
         </activity>
         <activity android:name=".WashingResult" />
         <activity android:name=".TvResult"/>
+        <activity android:name=".RefrigeratorResult"/>
 
     </application>
 

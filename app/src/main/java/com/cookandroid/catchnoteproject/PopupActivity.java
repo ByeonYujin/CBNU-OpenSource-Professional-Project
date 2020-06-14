@@ -9,8 +9,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 public class PopupActivity extends Activity {
 
@@ -19,6 +22,7 @@ public class PopupActivity extends Activity {
     TextView specTv;
     ImageButton shareImageButton;
     ImageButton copyImageButton;
+    ImageView itemImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,15 +37,22 @@ public class PopupActivity extends Activity {
         specTv = (TextView) findViewById(R.id.spec);
         shareImageButton = (ImageButton) findViewById(R.id.shareBtn);
         copyImageButton = (ImageButton) findViewById(R.id.copyBtn);
+        itemImage = (ImageView) findViewById(R.id.itemImage);
 
         //데이터 가져오기
         Intent intent = getIntent();
         String model = intent.getStringExtra("model");
         String price = intent.getStringExtra("price");
         String spec = intent.getStringExtra("spec");
+        String img = intent.getStringExtra("img");
+
         modelTv.setText(model);
         priceTv.setText(price);
         specTv.setText(spec);
+        Glide.with(this)
+                .load(img)
+                .into(this.itemImage);
+
 
         shareImageButton.setOnClickListener(new View.OnClickListener() {
             @Override

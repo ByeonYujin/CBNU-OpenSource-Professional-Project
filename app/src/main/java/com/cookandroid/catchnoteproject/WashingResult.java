@@ -3,6 +3,7 @@ package com.cookandroid.catchnoteproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -81,5 +82,17 @@ public class WashingResult extends AppCompatActivity {
 
 
 
+    }
+    //팝업창
+    public void mOnPopupClick(View v){
+        //데이터 담아서 팝업(액티비티) 호출
+        recyclerView = findViewById(R.id.recyclerView);
+        Integer position = recyclerView.getChildLayoutPosition(v);
+        Intent intent = new Intent(this, PopupActivity.class);
+        intent.putExtra("model", arrayList.get(position).getId());
+        intent.putExtra("price", String.valueOf(arrayList.get(position).getMoney()));
+        intent.putExtra("spec", arrayList.get(position).getSpec());
+        intent.putExtra("img", arrayList.get(position).getProfile());
+        startActivityForResult(intent, 1);
     }
 }

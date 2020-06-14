@@ -132,6 +132,14 @@ public class WasherselectionActivity extends AppCompatActivity {
     //ResultActivity로 이동
     private void GoResultActivity(){
         Intent intent = new Intent(this, WashingResult.class);
+       String op1 = option1.getSelectedItem().toString();
+       String op2 = option2.getSelectedItem().toString();
+       String op3 = option3.getSelectedItem().toString();
+
+       intent.putExtra("op1",op1);
+       intent.putExtra("op2",op2);
+       intent.putExtra("op3",op3);
+
         startActivity(intent);
     }
 

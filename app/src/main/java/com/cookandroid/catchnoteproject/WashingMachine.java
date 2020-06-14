@@ -6,6 +6,34 @@ public class WashingMachine {
     private String id;
     private int money;
     private String spec;
+    private String type;
+    private String manufacturer;
+    private String size;
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     //중요하
     public WashingMachine(){}
 

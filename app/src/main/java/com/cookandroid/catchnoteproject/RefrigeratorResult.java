@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -14,9 +15,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.w3c.dom.Text;
 
 public class RefrigeratorResult extends AppCompatActivity {
 
@@ -32,6 +37,13 @@ public class RefrigeratorResult extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycler_view);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        ActionBar actionBar;
+        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         Intent intent2 =new Intent(getIntent());
 
@@ -39,7 +51,14 @@ public class RefrigeratorResult extends AppCompatActivity {
         final String m = intent2.getStringExtra("in4");
         final String e = intent2.getStringExtra("in5");
 
+        TextView firstOption = (TextView) findViewById(R.id.option1Tv);
+        TextView secondOption = (TextView) findViewById(R.id.option2Tv);
+        TextView thirdOption = (TextView) findViewById(R.id.option3Tv);
+        TextView resultCount = (TextView)findViewById(R.id.countTv);
 
+        firstOption.setText(t);
+        secondOption.setText(m);
+        thirdOption.setText(e);
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -83,8 +102,6 @@ public class RefrigeratorResult extends AppCompatActivity {
 
         adapter = new RefrigeratorAdapter(arrayList,this);
         recyclerView.setAdapter(adapter); //리사클러뷰에 어댑터 연결
-
-
 
     }
 

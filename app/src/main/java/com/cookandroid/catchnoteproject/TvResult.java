@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
@@ -15,7 +16,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,7 +41,20 @@ public class TvResult extends AppCompatActivity {
         final String m= intent.getStringExtra("in1");
         final String size = intent.getStringExtra("in2");
 
+        TextView firstOption = (TextView) findViewById(R.id.option1Tv);
+        TextView secondOption = (TextView) findViewById(R.id.option2Tv);
 
+        firstOption.setText(m);
+        secondOption.setText(size);
+
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        ActionBar actionBar;
+        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
 
         recyclerView = findViewById(R.id.recyclerView);

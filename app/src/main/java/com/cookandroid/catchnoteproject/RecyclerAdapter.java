@@ -1,8 +1,10 @@
 package com.cookandroid.catchnoteproject;
 
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,6 +46,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
         private TextView textView2;
         private TextView textView3;
         private ImageView imageView;
+        private ImageButton imageButton;
 
         ItemViewHolder(View itemView) {
             super(itemView);

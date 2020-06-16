@@ -118,6 +118,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff">
+
+        <ImageButton
+            android:id="@+id/keepBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#ffffff"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_keep1"></ImageButton>
         <ImageButton
             android:src="@drawable/ic_share"
             android:id="@+id/shareBtn"

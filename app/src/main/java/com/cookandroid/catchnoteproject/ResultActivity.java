@@ -1,9 +1,12 @@
 package com.cookandroid.catchnoteproject;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -29,11 +32,13 @@ public class ResultActivity extends AppCompatActivity {
     private Integer count;
     private int k;
     private Class back;
+    private int keep;
 
     List<String> listName = new ArrayList<>();
     List<String> listPrice = new ArrayList<>();
     List<String> listSpec = new ArrayList<>();
     List<Integer> listImage = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +120,14 @@ public class ResultActivity extends AppCompatActivity {
             //검색된 항목 수 표시
             resultCount.setText("검색 결과 : 총 " + count.toString() + "개");
         }
+
+        /*final ImageButton keepBtn = (ImageButton) findViewById(R.id.beforekeep);
+        keepBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                keepBtn.setImageResource(R.mipmap.ic_keep2);
+            }
+        });*/
     }
 
     @Override

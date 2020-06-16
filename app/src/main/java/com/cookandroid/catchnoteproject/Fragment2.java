@@ -42,6 +42,7 @@ public class Fragment2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment2,container, false);
+
         int i;
         for(i=0;i<imgButtonIDs.length;i++){
             imgButtons[i]=(ImageButton) view.findViewById(imgButtonIDs[i]);
@@ -54,7 +55,7 @@ public class Fragment2 extends Fragment {
             final int index;
             index = i;
 
-            //이미지 버튼 웹사이트 연결 -> 모바일 사이트로 변경 예정
+            //이미지 버튼 웹사이트 연결
             imgButtons[index].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

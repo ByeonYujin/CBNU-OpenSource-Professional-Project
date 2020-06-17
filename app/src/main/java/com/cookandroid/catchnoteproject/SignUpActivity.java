@@ -106,6 +106,6 @@ public class SignUpActivity extends AppCompatActivity
         Map<String, Object> nuser = new User(userId).toMap();
         nuser.put("uid", userId);
 
-        mDatabase.push().setValue(nuser);
+        mDatabase.push().setValue(nuser);//.
     }
 }

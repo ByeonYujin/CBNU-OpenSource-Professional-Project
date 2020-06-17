@@ -124,8 +124,9 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="#ffffff"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_keep1"></ImageButton>
+            android:scaleType="center"
+            android:src="@drawable/ic_emptyheart"></ImageButton>
+
         <ImageButton
             android:src="@drawable/ic_share"
             android:id="@+id/shareBtn"

@@ -46,7 +46,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
         private TextView textView2;
         private TextView textView3;
         private ImageView imageView;
-        private ImageButton imageButton;
 
         ItemViewHolder(View itemView) {
             super(itemView);

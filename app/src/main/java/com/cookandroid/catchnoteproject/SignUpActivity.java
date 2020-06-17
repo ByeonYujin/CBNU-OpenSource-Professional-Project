@@ -13,16 +13,20 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity
 {
     private static final String TAG = "SignUpActivity";
     private FirebaseAuth mAuth;
-
-
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +34,10 @@ public class SignUpActivity extends AppCompatActivity
         setContentView(R.layout.activity_sign_up);
 
         mAuth = FirebaseAuth.getInstance();
+
         findViewById(R.id.signUpButton).setOnClickListener(onClickListener);
         findViewById(R.id.gotoLoginButton).setOnClickListener(onClickListener);
+
     }
     @Override
     public void onStart() {
@@ -54,7 +60,7 @@ public class SignUpActivity extends AppCompatActivity
     } ;
 
     private void signUp() {
-        String email = ((EditText)findViewById(R.id.emailEditText)).getText().toString();
+        final String email = ((EditText)findViewById(R.id.emailEditText)).getText().toString();
         String password = ((EditText)findViewById(R.id.passwordEditText)).getText().toString();
         String passwordCheck = ((EditText)findViewById(R.id.passwordCheckEditText)).getText().toString();
 
@@ -66,6 +72,7 @@ public class SignUpActivity extends AppCompatActivity
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     FirebaseUser user = mAuth.getCurrentUser();
+                                    writeNewUser(email);
                                     showToast( "회원가입에 성공하였습니다.");
                                 } else {
                                     if(task.getException() != null){
@@ -89,5 +96,16 @@ public class SignUpActivity extends AppCompatActivity
     private void myStartActivity(Class c) {
         Intent intent = new Intent(this, c);
         startActivity(intent);
+    }
+
+    private void writeNewUser(String userId) {
+        // Create new post at /user-posts/$userid/$postid and at
+        // /posts/$postid simultaneously
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
+        Map<String, Object> nuser = new User(userId).toMap();
+        nuser.put("uid", userId);
+
+        mDatabase.push().setValue(nuser);
     }
 }

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "685446131071",
+    "firebase_url": "https://catchnote-10be6.firebaseio.com",
+    "project_id": "catchnote-10be6",
+    "storage_bucket": "catchnote-10be6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:685446131071:android:5e9873c7c573320e953e4a",
+        "android_client_info": {
+          "package_name": "com.cookandroid.catchnoteproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "685446131071-knk3h2b0hn2u3s65i9jo0qen7berp7j4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cookandroid.catchnoteproject",
+            "certificate_hash": "51d99f756c7dba45d28cbd4d3fa05c928289b0cd"
+          }
+        },
+        {
+          "client_id": "685446131071-ficor9nvu2cl4boomls91mmuna9pgjgv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGKqb-AfbnzAZagrbqjBa9UVE4DnDB3tY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "685446131071-ficor9nvu2cl4boomls91mmuna9pgjgv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

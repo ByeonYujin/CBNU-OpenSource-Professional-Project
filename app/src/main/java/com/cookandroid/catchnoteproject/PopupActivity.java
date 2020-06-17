@@ -23,6 +23,8 @@ public class PopupActivity extends Activity {
     ImageButton shareImageButton;
     ImageButton copyImageButton;
     ImageView itemImage;
+    ImageButton keepImageBtn;
+    private int k;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class PopupActivity extends Activity {
         shareImageButton = (ImageButton) findViewById(R.id.shareBtn);
         copyImageButton = (ImageButton) findViewById(R.id.copyBtn);
         itemImage = (ImageView) findViewById(R.id.itemImage);
+        keepImageBtn = (ImageButton) findViewById(R.id.keepBtn);
 
         //데이터 가져오기
         Intent intent = getIntent();
@@ -88,6 +91,28 @@ public class PopupActivity extends Activity {
                 return true;
             }
         });
+
+
+        keepImageBtn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+
+                    if (k==0) {
+                        keepImageBtn.setImageResource(R.drawable.ic_filledheart);
+                        Toast.makeText(getApplicationContext(), "찜목록에 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                        k++;
+                    }
+                    else {
+                        k--;
+                        keepImageBtn.setImageResource(R.drawable.ic_emptyheart);
+                        Toast.makeText(getApplicationContext(), "찜목록에서 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                return false;
+            }
+        });
     }
 
     //확인 버튼 클릭
@@ -110,4 +135,6 @@ public class PopupActivity extends Activity {
         //안드로이드 백버튼 막기
         return;
     }
+
+
 }

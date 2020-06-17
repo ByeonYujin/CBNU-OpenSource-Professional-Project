@@ -180,6 +180,7 @@ public class ResultActivity extends AppCompatActivity {
             intent.putExtra("price", listPrice.get(position));
             intent.putExtra("spec", listSpec.get(position));
             startActivityForResult(intent, 1);
+
         }
     }
 }

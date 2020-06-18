@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
@@ -46,8 +47,13 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.TvViewHolder>  {
                 .load(arrayList.get(position).getProfile())
                 .into(holder.iv_profile);
 
+        //숫자 돈으로 바꾸기
+        DecimalFormat myFormatter = new DecimalFormat("###,###");
+        String formattedStringPrice = myFormatter.format(arrayList.get(position).getMoney());
+
         holder.id.setText(arrayList.get(position).getId());         //리스트에 디비넣어온다음 뿌려주는역할
-        holder.money.setText(String.valueOf(arrayList.get(position).getMoney()));         //리스트에 디비넣어온다음 뿌려주는역할
+        //holder.money.setText(String.valueOf(arrayList.get(position).getMoney())+'원');         //리스트에 디비넣어온다음 뿌려주는역할
+        holder.money.setText(formattedStringPrice+'원');
         holder.spec.setText(arrayList.get(position).getSpec());         //리스트에 디비넣어온다음 뿌려주는역할
 
 

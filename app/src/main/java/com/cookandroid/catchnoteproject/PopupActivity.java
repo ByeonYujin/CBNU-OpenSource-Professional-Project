@@ -5,6 +5,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -13,7 +14,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PopupActivity extends Activity {
 
@@ -25,6 +39,10 @@ public class PopupActivity extends Activity {
     ImageView itemImage;
     ImageButton keepImageBtn;
     private int k;
+    private FirebaseDatabase database;
+    private DatabaseReference databaseReference;
+    private FirebaseUser mAuth;
+    private String key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +60,32 @@ public class PopupActivity extends Activity {
         itemImage = (ImageView) findViewById(R.id.itemImage);
         keepImageBtn = (ImageButton) findViewById(R.id.keepBtn);
 
+        //user 아이디 받고 db연동
+        mAuth = FirebaseAuth.getInstance().getCurrentUser();
+        key = mAuth.getUid();
+
+        database = FirebaseDatabase.getInstance(); //파이어베이스 데이터베이스 연동
+        databaseReference = database.getReference("users").child(key).child("wishlist"); //DB테이블연결
+
         //데이터 가져오기
         Intent intent = getIntent();
-        String model = intent.getStringExtra("model");
-        String price = intent.getStringExtra("price");
-        String spec = intent.getStringExtra("spec");
-        String img = intent.getStringExtra("img");
+        final String model = intent.getStringExtra("model");
+        final String spec = intent.getStringExtra("spec");
+        final String img = intent.getStringExtra("img");
+        final int category = intent.getIntExtra("category", 0);
+        final String price;
+
+        if (category > 0) {
+            int priceint = intent.getIntExtra("price", 0);
+
+            DecimalFormat myFormatter = new DecimalFormat("###,###");
+            String formattedStringPrice = myFormatter.format(priceint);
+            price = formattedStringPrice+'원';
+        }
+        else {
+            final String pricestr = intent.getStringExtra("price");
+            price = pricestr;
+        }
 
         modelTv.setText(model);
         priceTv.setText(price);
@@ -93,6 +131,7 @@ public class PopupActivity extends Activity {
         });
 
 
+        //찜기능
         keepImageBtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
@@ -100,12 +139,14 @@ public class PopupActivity extends Activity {
                 if(event.getAction() == MotionEvent.ACTION_DOWN){
 
                     if (k==0) {
-                        keepImageBtn.setImageResource(R.drawable.ic_filledheart);
+                        keepImageBtn.setImageResource(R.drawable.ic_filledheart); //하트 모양 바꾸기
+                        additem(model, price, spec, img, category); // users/userid/keep_list에 추가
                         Toast.makeText(getApplicationContext(), "찜목록에 저장되었습니다.", Toast.LENGTH_SHORT).show();
                         k++;
                     }
                     else {
                         k--;
+                        deleteitem(); // db에서 삭제
                         keepImageBtn.setImageResource(R.drawable.ic_emptyheart);
                         Toast.makeText(getApplicationContext(), "찜목록에서 삭제되었습니다.", Toast.LENGTH_SHORT).show();
                     }
@@ -136,5 +177,20 @@ public class PopupActivity extends Activity {
         return;
     }
 
+    private void additem(String model, String price, String spec, String img, int category){
 
+        HashMap<String, Object> item = new HashMap<>();
+        item.put("id", model);
+        item.put("money", price);
+        item.put("profile", img);
+        item.put("spec", spec);
+
+        databaseReference = databaseReference.push();
+        databaseReference.setValue(item);
+    }
+
+    private void deleteitem(){
+        databaseReference.setValue(null);
+        databaseReference = database.getReference("users").child(key).child("keep_list");
+    }
 }

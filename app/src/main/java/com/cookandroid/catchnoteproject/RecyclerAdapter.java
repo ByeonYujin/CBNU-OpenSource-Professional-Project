@@ -1,5 +1,6 @@
 package com.cookandroid.catchnoteproject;
 
+import android.content.Context;
 import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +18,19 @@ import java.util.ArrayList;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder> {
 
     private ArrayList<Data> listData = new ArrayList<>();
+    private Context context;
 
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
         return new ItemViewHolder(view);
+    }
+
+    public RecyclerAdapter(){};
+
+    public RecyclerAdapter(ArrayList<Data> arrayList, Context context) {
+        this.listData = arrayList;
+        this.context = context;
     }
 
     @Override

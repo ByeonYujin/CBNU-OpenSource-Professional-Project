@@ -15,6 +15,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -71,7 +73,7 @@ public class SignUpActivity extends AppCompatActivity
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    FirebaseUser firebaseUser = mAuth.getCurrentUser();
                                     writeNewUser(email);
                                     showToast( "회원가입에 성공하였습니다.");
                                 } else {
@@ -102,10 +104,17 @@ public class SignUpActivity extends AppCompatActivity
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
-        Map<String, Object> nuser = new User(userId).toMap();
-        nuser.put("uid", userId);
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid());
 
-        mDatabase.push().setValue(nuser);//.
+        Map<String, Object> userinfo = new HashMap<>();
+
+        User user = new User(userId);
+
+        userinfo = user.toMap();
+
+        userinfo.put("uid", userId);
+
+        mDatabase.setValue(userinfo);
+
     }
 }

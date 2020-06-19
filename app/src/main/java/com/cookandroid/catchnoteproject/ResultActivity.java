@@ -179,8 +179,9 @@ public class ResultActivity extends AppCompatActivity {
             intent.putExtra("model", listName.get(position));
             intent.putExtra("price", listPrice.get(position));
             intent.putExtra("spec", listSpec.get(position));
+            intent.putExtra("img", " "); // 이미지는 보류
+            intent.putExtra("category", 0);
             startActivityForResult(intent, 1);
-
         }
     }
 }

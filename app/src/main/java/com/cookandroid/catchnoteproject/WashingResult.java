@@ -107,9 +107,10 @@ public class WashingResult extends AppCompatActivity {
         Integer position = recyclerView.getChildLayoutPosition(v);
         Intent intent = new Intent(this, PopupActivity.class);
         intent.putExtra("model", arrayList.get(position).getId());
-        intent.putExtra("price", String.valueOf(arrayList.get(position).getMoney()));
+        intent.putExtra("price", arrayList.get(position).getMoney());
         intent.putExtra("spec", arrayList.get(position).getSpec());
         intent.putExtra("img", arrayList.get(position).getProfile());
+        intent.putExtra("category", 1);
         startActivityForResult(intent, 1);
     }
 }

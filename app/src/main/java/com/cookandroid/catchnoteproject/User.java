@@ -21,4 +21,8 @@ public class User {
         return result;
     }
 
+    public String getUserid(){
+        return userId;
+    }
+
 }

@@ -54,7 +54,6 @@ public class RefrigeratorResult extends AppCompatActivity {
         TextView firstOption = (TextView) findViewById(R.id.option1Tv);
         TextView secondOption = (TextView) findViewById(R.id.option2Tv);
         TextView thirdOption = (TextView) findViewById(R.id.option3Tv);
-        TextView resultCount = (TextView)findViewById(R.id.countTv);
 
         firstOption.setText(t);
         secondOption.setText(m);
@@ -84,7 +83,7 @@ public class RefrigeratorResult extends AppCompatActivity {
 
 
                     if((t.equals(test))&&(m.equals(test2))&&(e.equals(test3))) {
-                       Log.d(test,test);
+                        Log.d(test,test);
                         arrayList.add(refrigerator); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보내준비
                     }
 
@@ -102,7 +101,6 @@ public class RefrigeratorResult extends AppCompatActivity {
 
         adapter = new RefrigeratorAdapter(arrayList,this);
         recyclerView.setAdapter(adapter); //리사클러뷰에 어댑터 연결
-
     }
 
     //팝업창
@@ -112,9 +110,10 @@ public class RefrigeratorResult extends AppCompatActivity {
         Integer position = recyclerView.getChildLayoutPosition(v);
         Intent intent = new Intent(this, PopupActivity.class);
         intent.putExtra("model", arrayList.get(position).getId());
-        intent.putExtra("price", String.valueOf(arrayList.get(position).getMoney()));
+        intent.putExtra("price", arrayList.get(position).getMoney());
         intent.putExtra("spec", arrayList.get(position).getSpec());
         intent.putExtra("img", arrayList.get(position).getProfile());
+        intent.putExtra("category", 3);
         startActivityForResult(intent, 1);
     }
 

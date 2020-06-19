@@ -119,6 +119,7 @@
         <activity android:name=".WashingResult" />
         <activity android:name=".TvResult"/>
         <activity android:name=".RefrigeratorResult"/>
+        <activity android:name=".WishList"></activity>
 
     </application>
 

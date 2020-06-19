@@ -25,7 +25,6 @@ public class RefrigeratorAdapter extends RecyclerView.Adapter<RefrigeratorAdapte
         this.context = context;
     }
 
-
     @NonNull
     @Override
     public RefrigeratorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

@@ -5,6 +5,7 @@ public class Data {
     private String content;
     private String spec;
     private int resId;
+    private String profile;
 
     public String getTitle() {
         return title;
@@ -33,5 +34,13 @@ public class Data {
     public String getSpec() {return spec;}
 
     public void setSpec(String spec) {this.spec=spec;}
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
+    }
 
 }

@@ -5,15 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
-
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.Timer;
@@ -47,12 +44,14 @@ public class MainActivity extends AppCompatActivity {
         Button refbtn = (Button) findViewById(R.id.refbtn);
         Button tvbtn = (Button) findViewById(R.id.tvbtn);
         TextView logoutTv = (TextView) findViewById(R.id.logoutTv);
+        Button keepbtn = (Button) findViewById(R.id.keeplist);
 
         nbbtn.setOnClickListener(OnClickListener);
         wasbtn.setOnClickListener(OnClickListener);
         refbtn.setOnClickListener(OnClickListener);
         tvbtn.setOnClickListener(OnClickListener);
         logoutTv.setOnClickListener(OnClickListener);
+        keepbtn.setOnClickListener(OnClickListener);
     }
 
     //버튼 클릭 시 화면 전환
@@ -136,6 +135,25 @@ public class MainActivity extends AppCompatActivity {
                     thread3.start();
                     GoRefriselectionActivity();
                     break;
+                case R.id.keeplist:
+                    showDialog(1);
+                    Thread thread4 = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //1초 후 다이얼로그 닫기
+                            TimerTask task = new TimerTask() {
+                                @Override
+                                public void run() {
+                                    removeDialog(1);
+                                }
+                            };
+                            Timer timer = new Timer();
+                            timer.schedule(task, 1000);
+                        }
+                    });
+                    thread4.start();
+                    GoKeepList();
+                    break;
                 case R.id.logoutTv:
                     FirebaseAuth.getInstance().signOut();
                     showToast("로그아웃 되었습니다.");
@@ -179,6 +197,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void startLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    private void GoKeepList() {
+        Intent intent = new Intent(this, WishList.class);
         startActivity(intent);
     }
 

@@ -18,11 +18,13 @@
         android:layout_marginRight="20dp"
         android:layout_marginVertical="10dp"
         android:id="@+id/logoutTv"></TextView>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:id="@+id/keeplist"
-        android:text="찜한목록"></Button>
+        android:layout_gravity="end"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/ic_wishlist"></ImageButton>
 
     <Button
         android:id="@+id/nbbtn"

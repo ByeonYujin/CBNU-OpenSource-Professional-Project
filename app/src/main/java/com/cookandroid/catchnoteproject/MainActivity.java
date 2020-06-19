@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         Button refbtn = (Button) findViewById(R.id.refbtn);
         Button tvbtn = (Button) findViewById(R.id.tvbtn);
         TextView logoutTv = (TextView) findViewById(R.id.logoutTv);
-        Button keepbtn = (Button) findViewById(R.id.keeplist);
+        ImageButton keepbtn = (ImageButton) findViewById(R.id.keeplist);
 
         nbbtn.setOnClickListener(OnClickListener);
         wasbtn.setOnClickListener(OnClickListener);
@@ -136,23 +137,28 @@ public class MainActivity extends AppCompatActivity {
                     GoRefriselectionActivity();
                     break;
                 case R.id.keeplist:
-                    showDialog(1);
-                    Thread thread4 = new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            //1초 후 다이얼로그 닫기
-                            TimerTask task = new TimerTask() {
-                                @Override
-                                public void run() {
-                                    removeDialog(1);
-                                }
-                            };
-                            Timer timer = new Timer();
-                            timer.schedule(task, 1000);
-                        }
-                    });
-                    thread4.start();
-                    GoKeepList();
+                    if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                        Toast.makeText(getApplicationContext(), "로그인 후 이용 가능합니다.", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        showDialog(1);
+                        Thread thread4 = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //1초 후 다이얼로그 닫기
+                                TimerTask task = new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        removeDialog(1);
+                                    }
+                                };
+                                Timer timer = new Timer();
+                                timer.schedule(task, 1000);
+                            }
+                        });
+                        thread4.start();
+                        GoKeepList();
+                    }
                     break;
                 case R.id.logoutTv:
                     FirebaseAuth.getInstance().signOut();

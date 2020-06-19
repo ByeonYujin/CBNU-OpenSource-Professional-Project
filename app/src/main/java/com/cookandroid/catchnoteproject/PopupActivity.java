@@ -60,13 +60,6 @@ public class PopupActivity extends Activity {
         itemImage = (ImageView) findViewById(R.id.itemImage);
         keepImageBtn = (ImageButton) findViewById(R.id.keepBtn);
 
-        //user 아이디 받고 db연동
-        mAuth = FirebaseAuth.getInstance().getCurrentUser();
-        key = mAuth.getUid();
-
-        database = FirebaseDatabase.getInstance(); //파이어베이스 데이터베이스 연동
-        databaseReference = database.getReference("users").child(key).child("wishlist"); //DB테이블연결
-
         //데이터 가져오기
         Intent intent = getIntent();
         final String model = intent.getStringExtra("model");
@@ -137,18 +130,30 @@ public class PopupActivity extends Activity {
             public boolean onTouch(View view, MotionEvent event) {
 
                 if(event.getAction() == MotionEvent.ACTION_DOWN){
-
-                    if (k==0) {
-                        keepImageBtn.setImageResource(R.drawable.ic_filledheart); //하트 모양 바꾸기
-                        additem(model, price, spec, img, category); // users/userid/keep_list에 추가
-                        Toast.makeText(getApplicationContext(), "찜목록에 저장되었습니다.", Toast.LENGTH_SHORT).show();
-                        k++;
+                    //회원만 이용 가능
+                    if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                        Toast.makeText(getApplicationContext(), "로그인 후 이용 가능합니다.", Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        k--;
-                        deleteitem(); // db에서 삭제
-                        keepImageBtn.setImageResource(R.drawable.ic_emptyheart);
-                        Toast.makeText(getApplicationContext(), "찜목록에서 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                        //user 아이디 받고 db연동
+                        mAuth = FirebaseAuth.getInstance().getCurrentUser();
+                        key = mAuth.getUid();
+
+                        database = FirebaseDatabase.getInstance(); //파이어베이스 데이터베이스 연동
+                        databaseReference = database.getReference("users").child(key).child("wishlist"); //DB테이블연결
+
+                        if (k==0) {
+                            keepImageBtn.setImageResource(R.drawable.ic_filledheart); //하트 모양 바꾸기
+                            additem(model, price, spec, img, category); // users/userid/keep_list에 추가
+                            Toast.makeText(getApplicationContext(), "찜목록에 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                            k++;
+                        }
+                        else {
+                            k--;
+                            deleteitem(); // db에서 삭제
+                            keepImageBtn.setImageResource(R.drawable.ic_emptyheart);
+                            Toast.makeText(getApplicationContext(), "찜목록에서 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
                 return false;

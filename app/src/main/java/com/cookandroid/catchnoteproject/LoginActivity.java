@@ -41,6 +41,10 @@ public class LoginActivity extends AppCompatActivity {
                     myStartActivity(SignUpActivity.class);
                     break;
                 case R.id.pass:
+                    if (mAuth.getCurrentUser() != null) {
+                        mAuth.signOut();
+                    }
+                    Toast.makeText(getApplicationContext(), "비회원으로 접속합니다.", Toast.LENGTH_SHORT).show();
                     GoMainActivity();
                     break;
             }

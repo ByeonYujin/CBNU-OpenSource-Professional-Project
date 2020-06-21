@@ -2,10 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="360dp"
     android:layout_height="match_parent"
+    android:layout_marginLeft="27dp"
     android:layout_marginTop="0dp"
-    android:background="#29418F"
+    android:layout_marginBottom="20dp"
+    android:background="@drawable/layout_background"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -26,109 +28,109 @@
             android:background="@drawable/logo4" />
     </androidx.appcompat.widget.Toolbar>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_marginHorizontal="10dp"
-        android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/eventText1"
+        android:layout_width="340dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="100dp"
         android:background="#ffffff"
-        android:layout_marginTop="60dp"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/eventText1"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="#ffffff"
-            android:layout_marginTop="5dp"
-            android:text="진행중인 행사"
-            android:layout_marginLeft="20dp"
-            android:textColor="#464646"
-            android:textSize="18dp" />
+        android:gravity="center_horizontal"
+        android:text="진행중인 행사"
+        android:textColor="#29418F"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <HorizontalScrollView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp">
-
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="0dp"
             android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
 
             <ImageButton
                 android:id="@+id/imgbtn1"
-                android:layout_width="300dp"
+                android:layout_width="250dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="0dp"
                 android:background="#ffffff"
+                android:padding="10dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/event1"></ImageButton>
 
             <ImageButton
                 android:id="@+id/imgbtn2"
-                android:layout_width="300dp"
+                android:layout_width="250dp"
                 android:layout_height="100dp"
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginRight="0dp"
                 android:background="#FFFFFF"
+                android:padding="10dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/event2"></ImageButton>
 
             <ImageButton
                 android:id="@+id/imgbtn3"
-                android:layout_width="300dp"
+                android:layout_width="250dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="0dp"
                 android:background="#ffffff"
+                android:padding="10dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/event3"></ImageButton>
 
             <ImageButton
                 android:id="@+id/imgbtn4"
-                android:layout_width="300dp"
+                android:layout_width="250dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="0dp"
                 android:background="#ffffff"
+                android:padding="10dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/event4"></ImageButton>
 
             <ImageButton
                 android:id="@+id/imgbtn5"
-                android:layout_width="300dp"
+                android:layout_width="150dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="0dp"
                 android:background="#ffffff"
+                android:padding="10dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/event5"></ImageButton>
 
         </LinearLayout>
     </HorizontalScrollView>
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_marginHorizontal="10dp"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:layout_marginTop="3dp"
-        android:orientation="vertical">
     <TextView
         android:id="@+id/eventText2"
-        android:layout_width="match_parent"
+        android:layout_width="340dp"
         android:layout_height="30dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
         android:background="#ffffff"
-        android:layout_marginLeft="20dp"
+        android:gravity="center_horizontal"
         android:text="추천 사이트"
-        android:textColor="#464646"
-        android:textSize="18dp" />
+        android:textColor="#29418F"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="15dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -382,5 +384,4 @@
     </ScrollView>
 
 
-</LinearLayout>
 </LinearLayout>

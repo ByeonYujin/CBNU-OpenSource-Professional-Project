@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,6 +44,10 @@ public class PopupActivity extends Activity {
     private DatabaseReference databaseReference;
     private FirebaseUser mAuth;
     private String key;
+    private String itemkey;
+    private ArrayList<WishList_Item> wishList;
+    private String listkey;
+    private RecyclerView.Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +72,18 @@ public class PopupActivity extends Activity {
         final String img = intent.getStringExtra("img");
         final int category = intent.getIntExtra("category", 0);
         final String price;
+        final String listkey = intent.getStringExtra("listkey");
+
+
+        if (FirebaseAuth.getInstance().getCurrentUser() != null){
+            k = intent.getIntExtra("check", 0);
+            if (k > 0) {
+                keepImageBtn.setImageResource(R.drawable.ic_filledheart);
+                itemkey = listkey;
+            } else{
+                keepImageBtn.setImageResource(R.drawable.ic_emptyheart);
+            }
+        }
 
         if (category > 0) {
             int priceint = intent.getIntExtra("price", 0);
@@ -86,7 +103,6 @@ public class PopupActivity extends Activity {
         Glide.with(this)
                 .load(img)
                 .into(this.itemImage);
-
 
         shareImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,14 +159,14 @@ public class PopupActivity extends Activity {
                         databaseReference = database.getReference("users").child(key).child("wishlist"); //DB테이블연결
 
                         if (k==0) {
+                            k=1;
                             keepImageBtn.setImageResource(R.drawable.ic_filledheart); //하트 모양 바꾸기
                             additem(model, price, spec, img, category); // users/userid/keep_list에 추가
                             Toast.makeText(getApplicationContext(), "찜목록에 저장되었습니다.", Toast.LENGTH_SHORT).show();
-                            k++;
                         }
                         else {
-                            k--;
-                            deleteitem(); // db에서 삭제
+                            k=0;
+                            deleteitem(itemkey); // db에서 삭제
                             keepImageBtn.setImageResource(R.drawable.ic_emptyheart);
                             Toast.makeText(getApplicationContext(), "찜목록에서 삭제되었습니다.", Toast.LENGTH_SHORT).show();
                         }
@@ -192,10 +208,11 @@ public class PopupActivity extends Activity {
 
         databaseReference = databaseReference.push();
         databaseReference.setValue(item);
+        itemkey = databaseReference.getKey();
     }
 
-    private void deleteitem(){
-        databaseReference.setValue(null);
-        databaseReference = database.getReference("users").child(key).child("keep_list");
+    private void deleteitem(String datakey){
+        databaseReference.child(datakey).setValue(null);
+        databaseReference = database.getReference("users").child(key).child("wishlist");
     }
 }

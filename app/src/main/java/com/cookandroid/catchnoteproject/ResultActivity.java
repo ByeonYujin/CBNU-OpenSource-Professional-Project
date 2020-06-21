@@ -3,6 +3,7 @@ package com.cookandroid.catchnoteproject;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -11,6 +12,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -19,6 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cookandroid.catchnoteproject.db.model.NoteBook;
 import com.cookandroid.catchnoteproject.db.service.NoteBookService;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +40,11 @@ public class ResultActivity extends AppCompatActivity {
     private Integer count;
     private int k;
     private Class back;
-    private int keep;
+    private ArrayList<WishList_Item> wishList;
+    public int k1;
+    public String listkey;
+    private FirebaseDatabase database;
+    private DatabaseReference databaseReference;
 
     List<String> listName = new ArrayList<>();
     List<String> listPrice = new ArrayList<>();
@@ -176,13 +188,62 @@ public class ResultActivity extends AppCompatActivity {
             recyclerView = findViewById(R.id.recyclerView);
             Integer position = recyclerView.getChildLayoutPosition(v);
             Intent intent = new Intent(this, PopupActivity.class);
+
+            //위시리스트 존재 여부 검사
+            if (FirebaseAuth.getInstance().getCurrentUser() == null )
+                intent.putExtra("check", 0);
+            else{
+                checkitem(listName.get(position));
+                intent.putExtra("check", k1);
+            }
+            intent.putExtra("listkey", listkey); // 위시리스트 내 아이템 키값 (존재하지 않을 경우 공백임)
+
             intent.putExtra("model", listName.get(position));
             intent.putExtra("price", listPrice.get(position));
             intent.putExtra("spec", listSpec.get(position));
             intent.putExtra("img", " "); // 이미지는 보류
             intent.putExtra("category", 0);
+
             startActivityForResult(intent, 1);
         }
+    }
+
+    private void checkitem(final String model){
+
+        wishList= new ArrayList<WishList_Item>();
+
+        database = FirebaseDatabase.getInstance(); //파이어베이스 데이터베이스 연동
+        databaseReference = database.getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("wishlist"); //DB테이블연결
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //파이어베이스 데이터베이스 의 데이터를 받아오는 곳
+                wishList.clear(); // 기존 배열리스트가 존재하지않게 초기화
+
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {//반복문으로 데이터 list추출
+
+                    WishList_Item item = snapshot.getValue(WishList_Item.class);
+                    if((model.equals(item.getId()))) {
+                        wishList.add(item); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보내준비
+                        listkey = snapshot.getKey();
+                        //keepImageBtn.setImageResource(R.drawable.ic_filledheart);
+                    }
+                }
+                adapter.notifyDataSetChanged();
+
+                if (wishList.isEmpty() == false){
+                    k1+=1;
+                } else{
+                    k1=0;
+                    listkey="";
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("wishlist Check", String.valueOf(databaseError.toException()));
+            }
+        });
     }
 }
 

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/bg_login">
+    android:background="@drawable/loginbackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
                 android:layout_height="120dp"
                 android:background="@drawable/logo5"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="160dp" />
+                android:layout_marginTop="210dp" />
 
 
             <EditText
@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:ems="10"
-                android:layout_marginTop="19dp"
+                android:layout_marginTop="35dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="15dp"
                 android:hint="이메일"
@@ -46,7 +46,7 @@
                 android:id="@+id/passwordEditText"
                 android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="39dp"
+                android:layout_marginTop="37dp"
                 android:ems="10"
                 android:hint="비밀번호"
                 android:layout_marginLeft="15dp"
@@ -58,15 +58,33 @@
                 android:background="@android:color/transparent"
                 android:inputType="textPassword" />
 
-            <Button
-                android:id="@+id/loginButton"
-                android:layout_marginTop="30dp"
-                android:layout_width="360dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/loginbutton"
-                android:text="로그인"
-                android:textSize="18dp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/loginButton"
+                    android:layout_width="140dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="#e5e5e5"
+                    android:text="로그인"
+                    android:textSize="18dp" />
+
+                <Button
+                    android:id="@+id/pass"
+                    android:layout_width="140dp"
+                    android:layout_height="45dp"
+                    android:text="비회원 접속"
+                    android:textColor="#ffffff"
+                    android:background="#29418f"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18dp" />
+
+        </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -89,11 +107,6 @@
                     android:textAlignment="center"
                     android:textColor="#ffffff"/>
             </LinearLayout>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/pass"
-                android:text="프리패스"></Button>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

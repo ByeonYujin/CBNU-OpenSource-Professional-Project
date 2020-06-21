@@ -6,11 +6,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -35,6 +39,36 @@ public class RefriselectionActivity extends AppCompatActivity {
         option1 = (Spinner)findViewById(R.id.spinner4);
         option2 = (Spinner)findViewById(R.id.spinner2);
         option3 = (Spinner)findViewById(R.id.spinner5);
+
+        ImageView wishlistBtn = (ImageView) findViewById(R.id.wishlistBtn);
+
+        wishlistBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                    Toast.makeText(getApplicationContext(), "로그인 후 이용 가능합니다.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    showDialog(1);
+                    Thread thread1 = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //1초 후 다이얼로그 닫기
+                            TimerTask task = new TimerTask() {
+                                @Override
+                                public void run() {
+                                    removeDialog(1);
+                                }
+                            };
+                            Timer timer = new Timer();
+                            timer.schedule(task, 1000);
+                        }
+                    });
+                    thread1.start();
+                    GoWishList();
+                }
+            }
+        });
 
         option1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -136,6 +170,11 @@ public class RefriselectionActivity extends AppCompatActivity {
 
     private void GoMainActivity(){
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    private void GoWishList(){
+        Intent intent = new Intent(this, WishList.class);
         startActivity(intent);
     }
 }

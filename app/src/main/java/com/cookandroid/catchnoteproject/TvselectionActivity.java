@@ -6,11 +6,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -36,6 +40,9 @@ public class TvselectionActivity extends AppCompatActivity {
 
         option1 = (Spinner)findViewById(R.id.spinner2);
         option2 = (Spinner)findViewById(R.id.spinner4);
+
+        ImageView wishlistBtn = (ImageView) findViewById(R.id.wishlistBtn);
+        wishlistBtn.setOnClickListener(OnClickListener);
 
         option1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -63,7 +70,7 @@ public class TvselectionActivity extends AppCompatActivity {
 
         Button searchBtn = (Button) findViewById(R.id.searchBtn);
         searchBtn.setOnClickListener(OnClickListener);
-
+        wishlistBtn.setOnClickListener(OnClickListener);
 
     }
 
@@ -89,6 +96,31 @@ public class TvselectionActivity extends AppCompatActivity {
                     thread.start();
                     GoResultActivity();
                     break;
+                case R.id.wishlistBtn:
+                    if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                        Toast.makeText(getApplicationContext(), "로그인 후 이용 가능합니다.", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    else {
+                        showDialog(1);
+                        Thread thread2 = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //1초 후 다이얼로그 닫기
+                                TimerTask task = new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        removeDialog(1);
+                                    }
+                                };
+                                Timer timer = new Timer();
+                                timer.schedule(task, 1000);
+                            }
+                        });
+                        thread2.start();
+                        GoWishList();
+                        break;
+                    }
             }
 
         }
@@ -135,4 +167,10 @@ public class TvselectionActivity extends AppCompatActivity {
 
 
     }
+
+    private void GoWishList() {
+        Intent intent = new Intent(this, WishList.class);
+        startActivity(intent);
+    }
+
 }

@@ -6,8 +6,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -47,6 +51,8 @@ public class WasherselectionActivity extends AppCompatActivity {
         option1 = (Spinner)findViewById(R.id.spinner4);
         option2 = (Spinner)findViewById(R.id.spinner2);
         option3 = (Spinner)findViewById(R.id.spinner5);
+
+        ImageView wishlistBtn = (ImageView) findViewById(R.id.wishlistBtn);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         ActionBar actionBar;
@@ -94,6 +100,7 @@ public class WasherselectionActivity extends AppCompatActivity {
 
         Button searchBtn = (Button) findViewById(R.id.searchBtn);
         searchBtn.setOnClickListener(OnClickListener);
+        wishlistBtn.setOnClickListener(OnClickListener);
 
     }
 
@@ -119,6 +126,30 @@ public class WasherselectionActivity extends AppCompatActivity {
                     thread.start();
                     GoResultActivity();
                     break;
+                case R.id.wishlistBtn:
+                    if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                        Toast.makeText(getApplicationContext(), "로그인 후 이용 가능합니다.", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    else {
+                        showDialog(1);
+                        Thread thread2 = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                TimerTask task = new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        removeDialog(1);
+                                    }
+                                };
+                                Timer timer = new Timer();
+                                timer.schedule(task, 1000);
+                            }
+                        });
+                        thread2.start();
+                        GoWishList();
+                        break;
+                    }
             }
 
         }
@@ -164,6 +195,12 @@ public class WasherselectionActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+    private void GoWishList() {
+        Intent intent = new Intent(this, WishList.class);
+        startActivity(intent);
+    }
+
 
 
 }

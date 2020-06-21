@@ -18,10 +18,18 @@
 
         <ImageView
             android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginRight="70dp"
+            android:layout_width="130dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="85dp"
             app:srcCompat="@drawable/logo4" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_wishlist"
+            android:id="@+id/wishlistBtn"
+            android:layout_marginLeft="95dp"
+            ></ImageView>
     </androidx.appcompat.widget.Toolbar>
 
     <TextView

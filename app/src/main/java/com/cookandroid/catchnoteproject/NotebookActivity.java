@@ -8,13 +8,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.ButtonBarLayout;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -33,6 +37,7 @@ public class NotebookActivity extends AppCompatActivity {
         btn1=(Button)findViewById(R.id.recommendBtn); //노트북 추천받기
         btn2=(Button)findViewById(R.id.buyBtn); //노트북 사러가기
         btn3=(Button)findViewById(R.id.searchBtn); //검색 버튼
+        ImageView wishlistBtn = (ImageView) findViewById(R.id.wishlistBtn);
 
         spinner2 = (Spinner)findViewById(R.id.spinner2);
         spinner4 = (Spinner)findViewById(R.id.spinner4);
@@ -79,6 +84,7 @@ public class NotebookActivity extends AppCompatActivity {
         btn1.setOnClickListener(OnClickListener);
         btn2.setOnClickListener(OnClickListener);
         btn3.setOnClickListener(OnClickListener);
+        wishlistBtn.setOnClickListener(OnClickListener);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         ActionBar actionBar;
@@ -123,9 +129,9 @@ public class NotebookActivity extends AppCompatActivity {
                         }
                     });
                     thread.start();
-                    FragmentTransaction transaction1=getSupportFragmentManager().beginTransaction();
-                    Fragment1 fragment1=new Fragment1();
-                    transaction1.replace(R.id.frame,fragment1);
+                    FragmentTransaction transaction1 = getSupportFragmentManager().beginTransaction();
+                    Fragment1 fragment1 = new Fragment1();
+                    transaction1.replace(R.id.frame, fragment1);
                     transaction1.commit();
                     btn3.setVisibility(View.VISIBLE); //화면 전환 시 버튼 보이게
                     break;
@@ -146,9 +152,9 @@ public class NotebookActivity extends AppCompatActivity {
                         }
                     });
                     thread1.start();
-                    FragmentTransaction transaction2=getSupportFragmentManager().beginTransaction();
-                    Fragment2 fragment2=new Fragment2();
-                    transaction2.replace(R.id.frame,fragment2);
+                    FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
+                    Fragment2 fragment2 = new Fragment2();
+                    transaction2.replace(R.id.frame, fragment2);
                     transaction2.commit();
                     btn3.setVisibility(View.INVISIBLE); //화면 전환 시 버튼 안보이게
                     break;
@@ -170,8 +176,31 @@ public class NotebookActivity extends AppCompatActivity {
                     });
                     thread2.start();
                     GoResultActivity();
+                case R.id.wishlistBtn:
+                    if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                        Toast.makeText(getApplicationContext(), "로그인 후 이용 가능합니다.", Toast.LENGTH_SHORT).show();
+                        break;
+                    } else {
+                        showDialog(1);
+                        Thread thread3 = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //1초 후 다이얼로그 닫기
+                                TimerTask task = new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        removeDialog(1);
+                                    }
+                                };
+                                Timer timer = new Timer();
+                                timer.schedule(task, 1000);
+                            }
+                        });
+                        thread3.start();
+                        GoWishList();
+                        break;
+                    }
             }
-
         }
     };
 
@@ -185,6 +214,11 @@ public class NotebookActivity extends AppCompatActivity {
 
     private void GoMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    private void GoWishList() {
+        Intent intent = new Intent(this, WishList.class);
         startActivity(intent);
     }
 

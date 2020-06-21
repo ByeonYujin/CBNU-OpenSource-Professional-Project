@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -17,6 +19,8 @@ import com.google.firebase.firestore.CollectionReference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -60,6 +64,34 @@ public class WashingResult extends AppCompatActivity {
         TextView secondOption = (TextView) findViewById(R.id.option2Tv);
         TextView thirdOption = (TextView) findViewById(R.id.option3Tv);
         TextView resultCount = (TextView)findViewById(R.id.countTv);
+        ImageView wishlistBtn = (ImageView) findViewById(R.id.wishlistBtn);
+
+        wishlistBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                    Toast.makeText(getApplicationContext(), "로그인 후 이용 가능합니다.", Toast.LENGTH_SHORT).show();
+                } else {
+                    showDialog(1);
+                    Thread thread1 = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //1초 후 다이얼로그 닫기
+                            TimerTask task = new TimerTask() {
+                                @Override
+                                public void run() {
+                                    removeDialog(1);
+                                }
+                            };
+                            Timer timer = new Timer();
+                            timer.schedule(task, 1000);
+                        }
+                    });
+                    thread1.start();
+                    GoWishList();
+                }
+            }
+        });
 
         firstOption.setText(t);
         secondOption.setText(m);
@@ -166,5 +198,15 @@ public class WashingResult extends AppCompatActivity {
                 Log.e("wishlist Check", String.valueOf(databaseError.toException()));
             }
         });
+    }
+
+    private void GoWishList() {
+        Intent intent = new Intent(this, WishList.class);
+        startActivity(intent);
+    }
+
+    protected CustomImageProgress onCreateDialog(int id) {
+        CustomImageProgress dialog = new CustomImageProgress(WashingResult.this, R.style.CustomProgressStyle);
+        return dialog;
     }
 }

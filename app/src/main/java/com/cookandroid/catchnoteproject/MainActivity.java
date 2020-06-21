@@ -44,14 +44,14 @@ public class MainActivity extends AppCompatActivity {
         Button wasbtn = (Button) findViewById(R.id.wasbtn);
         Button refbtn = (Button) findViewById(R.id.refbtn);
         Button tvbtn = (Button) findViewById(R.id.tvbtn);
-        TextView logoutTv = (TextView) findViewById(R.id.logoutTv);
+        ImageButton logoutBtn = (ImageButton) findViewById(R.id.logout);
         ImageButton keepbtn = (ImageButton) findViewById(R.id.keeplist);
 
         nbbtn.setOnClickListener(OnClickListener);
         wasbtn.setOnClickListener(OnClickListener);
         refbtn.setOnClickListener(OnClickListener);
         tvbtn.setOnClickListener(OnClickListener);
-        logoutTv.setOnClickListener(OnClickListener);
+        logoutBtn.setOnClickListener(OnClickListener);
         keepbtn.setOnClickListener(OnClickListener);
     }
 
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                         GoKeepList();
                     }
                     break;
-                case R.id.logoutTv:
+                case R.id.logout:
                     FirebaseAuth.getInstance().signOut();
                     showToast("로그아웃 되었습니다.");
                     startLoginActivity();

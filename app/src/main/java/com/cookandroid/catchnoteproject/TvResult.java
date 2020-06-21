@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,6 +17,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -47,6 +51,35 @@ public class TvResult extends AppCompatActivity {
 
         TextView firstOption = (TextView) findViewById(R.id.option1Tv);
         TextView secondOption = (TextView) findViewById(R.id.option2Tv);
+        ImageView wishlistBtn = (ImageView) findViewById(R.id.wishlistBtn);
+
+        wishlistBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                    Toast.makeText(getApplicationContext(), "로그인 후 이용 가능합니다.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    showDialog(1);
+                    Thread thread1 = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //1초 후 다이얼로그 닫기
+                            TimerTask task = new TimerTask() {
+                                @Override
+                                public void run() {
+                                    removeDialog(1);
+                                }
+                            };
+                            Timer timer = new Timer();
+                            timer.schedule(task, 1000);
+                        }
+                    });
+                    thread1.start();
+                    GoWishList();
+                }
+            }
+        });
 
         firstOption.setText(m);
         secondOption.setText(size);
@@ -160,5 +193,14 @@ public class TvResult extends AppCompatActivity {
                 Log.e("wishlist Check", String.valueOf(databaseError.toException()));
             }
         });
+    }
+    protected CustomImageProgress onCreateDialog(int id) {
+        CustomImageProgress dialog = new CustomImageProgress(TvResult.this, R.style.CustomProgressStyle);
+        return dialog;
+    }
+
+    private void GoWishList() {
+        Intent intent = new Intent(this, WishList.class);
+        startActivity(intent);
     }
 }

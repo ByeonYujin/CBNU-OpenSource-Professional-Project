@@ -49,6 +49,7 @@ public class ResultActivity extends AppCompatActivity {
     public String listkey;
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
+    private FirebaseAuth firebaseAuth;
 
     List<String> listName = new ArrayList<>();
     List<String> listPrice = new ArrayList<>();
@@ -78,7 +79,7 @@ public class ResultActivity extends AppCompatActivity {
         wishlistBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                if (firebaseAuth.getInstance().getCurrentUser() == null) {
                     Toast.makeText(getApplicationContext(), "로그인 후 이용 가능합니다.", Toast.LENGTH_SHORT).show();
                 } else {
                     showDialog(1);

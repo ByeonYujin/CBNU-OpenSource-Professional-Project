@@ -176,6 +176,7 @@ public class NotebookActivity extends AppCompatActivity {
                     });
                     thread2.start();
                     GoResultActivity();
+                    break;
                 case R.id.wishlistBtn:
                     if (FirebaseAuth.getInstance().getCurrentUser() == null) {
                         Toast.makeText(getApplicationContext(), "로그인 후 이용 가능합니다.", Toast.LENGTH_SHORT).show();

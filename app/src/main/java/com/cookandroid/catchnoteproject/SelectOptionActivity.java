@@ -23,6 +23,7 @@ public class SelectOptionActivity extends AppCompatActivity {
 
     private String manufacture,purpose, size;
     private Spinner spinner2,spinner4,spinner5;
+    private FirebaseAuth firebaseAuth;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,34 +34,6 @@ public class SelectOptionActivity extends AppCompatActivity {
         spinner4 = (Spinner)findViewById(R.id.spinner4);
         spinner5 = (Spinner)findViewById(R.id.spinner5);
         ImageView wishlistBtn = (ImageView) findViewById(R.id.wishlistBtn);
-
-        wishlistBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-                    Toast.makeText(getApplicationContext(), "로그인 후 이용 가능합니다.", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    showDialog(1);
-                    Thread thread1 = new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            //1초 후 다이얼로그 닫기
-                            TimerTask task = new TimerTask() {
-                                @Override
-                                public void run() {
-                                    removeDialog(1);
-                                }
-                            };
-                            Timer timer = new Timer();
-                            timer.schedule(task, 1000);
-                        }
-                    });
-                    thread1.start();
-                    GoWishList();
-                }
-            }
-        });
 
         spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -101,6 +74,7 @@ public class SelectOptionActivity extends AppCompatActivity {
 
         Button searchBtn = (Button) findViewById(R.id.searchBtn);
         searchBtn.setOnClickListener(OnClickListener);
+        wishlistBtn.setOnClickListener(OnClickListener);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         ActionBar actionBar;
@@ -147,6 +121,31 @@ public class SelectOptionActivity extends AppCompatActivity {
                     thread.start();
                     GoResultActivity();
                     break;
+                case R.id.wishlistBtn:
+                    if (firebaseAuth.getInstance().getCurrentUser() == null) {
+                        Toast.makeText(getApplicationContext(), "로그인 후 이용 가능합니다.", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    else {
+                        showDialog(1);
+                        Thread thread1 = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //1초 후 다이얼로그 닫기
+                                TimerTask task = new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        removeDialog(1);
+                                    }
+                                };
+                                Timer timer = new Timer();
+                                timer.schedule(task, 1000);
+                            }
+                        });
+                        thread1.start();
+                        GoWishList();
+                        break;
+                    }
             }
 
         }

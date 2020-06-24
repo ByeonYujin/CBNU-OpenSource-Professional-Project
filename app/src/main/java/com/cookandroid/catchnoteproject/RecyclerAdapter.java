@@ -69,7 +69,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
             textView1.setText(data.getTitle());
             textView2.setText(data.getContent());
             textView3.setText(data.getSpec());
-            imageView.setImageResource(data.getResId());
+            imageView.setImageResource(R.drawable.note);
         }
     }
 }

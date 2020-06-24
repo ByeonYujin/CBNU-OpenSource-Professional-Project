@@ -49,7 +49,6 @@ public class ResultActivity extends AppCompatActivity {
     public String listkey;
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
-    private FirebaseAuth firebaseAuth;
 
     List<String> listName = new ArrayList<>();
     List<String> listPrice = new ArrayList<>();
@@ -79,7 +78,7 @@ public class ResultActivity extends AppCompatActivity {
         wishlistBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (firebaseAuth.getInstance().getCurrentUser() == null) {
+                if (FirebaseAuth.getInstance().getCurrentUser() == null) {
                     Toast.makeText(getApplicationContext(), "로그인 후 이용 가능합니다.", Toast.LENGTH_SHORT).show();
                 } else {
                     showDialog(1);
@@ -204,6 +203,7 @@ public class ResultActivity extends AppCompatActivity {
             data.setTitle(listName.get(i));
             data.setContent("가격 " + listPrice.get(i));
             data.setSpec(listSpec.get(i));
+            //data.setProfile();
             data.setResId(R.drawable.ic_launcher_foreground);
 
             //데이터 추가
@@ -213,6 +213,7 @@ public class ResultActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         return count;
     }
+
 
     //팝업창
     public void mOnPopupClick(View v){
@@ -231,10 +232,13 @@ public class ResultActivity extends AppCompatActivity {
             }
             intent.putExtra("listkey", listkey); // 위시리스트 내 아이템 키값 (존재하지 않을 경우 공백임)
 
+
+            String nn = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fkr.123rf.com%2Fphoto_46281597_%25EB%2585%25B8%25ED%258A%25B8%25EB%25B6%2581-%25EC%259D%25BC%25EB%259F%25AC%25EC%258A%25A4%25ED%258A%25B8-%25EA%25B3%25A0%25ED%2592%2588%25EC%25A7%2588%25EC%259D%2598-%25EC%259D%25B4%25EB%25AF%25B8%25EC%25A7%2580%25EC%2597%2590-%25EA%25B3%25A0%25EB%25A6%25BD-%25EB%2590%259C-%25ED%259D%25B0%25EC%2583%2589.html&psig=AOvVaw26bZA1r6JbxbHl1NGpnw1x&ust=1592908118629000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIjp66ableoCFQAAAAAdAAAAABAD";
+
             intent.putExtra("model", listName.get(position));
             intent.putExtra("price", listPrice.get(position));
             intent.putExtra("spec", listSpec.get(position));
-            intent.putExtra("img", " "); // 이미지는 보류
+            intent.putExtra("img",""); // 이미지는 보류
             intent.putExtra("category", 0);
 
             startActivityForResult(intent, 1);

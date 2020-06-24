@@ -1,3 +1,4 @@
+
 package com.cookandroid.catchnoteproject;
 
 import android.content.Intent;
